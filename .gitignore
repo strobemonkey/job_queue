@@ -1,1 +1,4 @@
 pkg
+*.log
+logs
+.DS_Store

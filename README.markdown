@@ -56,3 +56,7 @@ AMQP
 <http://github.com/tmm1/amqp/>
 
 You need to run all your code within an eventmachine loop to use AMQP.
+
+Starling
+--------
+<http://github.com/starling/starling/>
