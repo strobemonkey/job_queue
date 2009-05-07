@@ -7,7 +7,7 @@ describe JobQueue::StarlingAdapter do
   end
   
   before :all do
-    JobQueue.adapter = JobQueue::StarlingAdapter.new( 'test_queue', 'localhost', '22122' )
+    JobQueue.adapter = JobQueue::StarlingAdapter.new( :queue_name => "test_queue" )
   end
   
   it "should write onto queue and fetch stuff back off" do    

@@ -10,10 +10,10 @@ class JobQueue::TestAdapter
   def subscribe(error_report, &block)
     loop do
       begin
-        sleep 0.1 if @queue.empty?
+        if @queue.empty? then sleep 0.1 ; end
         yield @queue.shift
-      rescue
-        error_report.call(job.body, e)
+      rescue => e        
+        error_report.call(@queue, e)
       end
     end
   end

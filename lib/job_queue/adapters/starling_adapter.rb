@@ -2,11 +2,11 @@ require 'memcache'
 require 'starling'
 
 class JobQueue::StarlingAdapter
-  def initialize(queue_name, server, port)
-    @queue_name = queue_name
-    @server = server
-    @port = port
-    @starling = Starling.new( @server + ':' + @port )
+  def initialize(options = {})
+    @queue_name = options[:host] || 'no_queue_name'
+    host = options[:host] || 'localhost'
+    port = options[:port] || '22122'   
+    @starling = Starling.new( host + ':' + port )
   end
 
   def put(string)
@@ -20,7 +20,6 @@ class JobQueue::StarlingAdapter
         job = @starling.fetch(@queue_name)
         JobQueue.logger.info "Starling received #{job}" 
         yield job
-        sleep 0.25
       rescue => e        
         error_report.call(job, e)
       end
